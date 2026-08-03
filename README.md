@@ -21,6 +21,18 @@ modificato e le tracce vengono esportate in FLAC lossless.
 - tema chiaro, scuro o di sistema;
 - applicazione desktop Windows basata su pywebview e WebView2.
 
+## Download
+
+Scarica l'installer Windows oppure la versione portabile dalla pagina
+[GitHub Releases](https://github.com/AngoloInformatico/audio-track-studio/releases/latest).
+
+- `AudioTrackStudio-Setup-1.0.0.exe`: installazione consigliata per Windows 10/11 x64;
+- `AudioTrackStudio-Portable-1.0.0.zip`: applicazione completa da estrarre e avviare;
+- `SHA256SUMS.txt`: checksum per verificare l'integrità dei download.
+
+La release non è firmata con un certificato Authenticode commerciale; Windows SmartScreen può
+mostrare un avviso al primo avvio.
+
 ## Architettura
 
 ```text

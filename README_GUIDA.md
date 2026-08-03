@@ -11,10 +11,11 @@ riconoscimento musicale opzionale, metadati e cover, esportazione lossless e pro
 
 ## Installazione Windows
 
-La distribuzione consigliata è:
+La distribuzione consigliata è disponibile nella pagina
+[GitHub Releases](https://github.com/AngoloInformatico/audio-track-studio/releases/latest):
 
 ```text
-release/installer/AudioTrackStudio-Setup-1.0.0.exe
+AudioTrackStudio-Setup-1.0.0.exe
 ```
 
 L'installer è per Windows 10/11 x64, non richiede privilegi amministrativi e installa
@@ -22,10 +23,10 @@ l'applicazione nel profilo dell'utente. Python, Node.js, npm, FFmpeg e ffprobe n
 sono già inclusi nella release. Se Microsoft Edge WebView2 Runtime non è presente, il setup
 esegue il bootstrapper Evergreen ufficiale Microsoft incluso nel pacchetto.
 
-È disponibile anche la versione portabile nella cartella:
+È disponibile anche la versione portabile:
 
 ```text
-release/Audio Track Studio/Audio Track Studio.exe
+AudioTrackStudio-Portable-1.0.0.zip
 ```
 
 La release non è firmata con un certificato Authenticode commerciale; Windows SmartScreen può
