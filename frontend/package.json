@@ -1,0 +1,40 @@
+{
+  "name": "audio-track-studio-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "e2e:phase2": "node e2e/phase2-smoke.mjs",
+    "e2e:phase3": "node e2e/phase3-smoke.mjs",
+    "e2e:phase4": "node e2e/phase4-smoke.mjs",
+    "e2e:phase5": "node e2e/phase5-smoke.mjs",
+    "e2e:phase6": "node e2e/phase6-smoke.mjs",
+    "e2e:phase7": "node e2e/phase7-smoke.mjs",
+    "e2e:empty-layout": "node e2e/empty-layout-smoke.mjs",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "wavesurfer.js": "^7.12.11"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "playwright-core": "^1.62.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.53.1",
+    "vite": "^8.2.0",
+    "vitest": "^4.1.10"
+  }
+}

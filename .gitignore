@@ -1,0 +1,40 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Frontend
+node_modules/
+frontend/dist/
+frontend/.cache/
+*.tsbuildinfo
+
+# Environment and local application data
+.env
+logs/
+cache/
+temp/
+output/
+*.atsproject
+
+# Builds and editors
+build/
+dist/
+release/
+.idea/
+.vscode/
+.tools/
+*.log
+desktop.ini
+
+# Audio sources and common cover files
+*.flac
+*.wav
+*.mp3
+*.m4a
+*.aac
+cover.jpg
+cover.png
