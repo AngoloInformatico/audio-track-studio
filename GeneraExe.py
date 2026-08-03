@@ -62,7 +62,7 @@ def main() -> int:
     )
     print(
         "Installer: "
-        "release\\installer\\AudioTrackStudio-Setup-1.0.0.exe"
+        "release\\installer\\AudioTrackStudio-Setup-1.0.1.exe"
     )
     return 0
 

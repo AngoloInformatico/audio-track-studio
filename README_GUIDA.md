@@ -1,6 +1,6 @@
 # Audio Track Studio — Guida e specifica di progetto
 
-> **Release Windows 1.0.0 — Fasi 1–8 complete**
+> **Release Windows 1.0.1 — Fasi 1–8 complete**
 
 ![Audio Track Studio Release 1.0](docs/screenshot-release.png)
 
@@ -15,7 +15,7 @@ La distribuzione consigliata è disponibile nella pagina
 [GitHub Releases](https://github.com/AngoloInformatico/audio-track-studio/releases/latest):
 
 ```text
-AudioTrackStudio-Setup-1.0.0.exe
+AudioTrackStudio-Setup-1.0.1.exe
 ```
 
 L'installer è per Windows 10/11 x64, non richiede privilegi amministrativi e installa
@@ -26,7 +26,7 @@ esegue il bootstrapper Evergreen ufficiale Microsoft incluso nel pacchetto.
 È disponibile anche la versione portabile:
 
 ```text
-AudioTrackStudio-Portable-1.0.0.zip
+AudioTrackStudio-Portable-1.0.1.zip
 ```
 
 La release non è firmata con un certificato Authenticode commerciale; Windows SmartScreen può

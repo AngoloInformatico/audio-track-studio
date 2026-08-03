@@ -58,5 +58,5 @@ if ($Installer) {
     if (-not $compiler) { throw 'Inno Setup 6 non trovato. Imposta ATS_ISCC_BINARY.' }
     & $compiler (Join-Path $projectRoot 'packaging\installer.iss')
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-    Write-Output "Installer: $(Join-Path $release 'installer\AudioTrackStudio-Setup-1.0.0.exe')"
+    Write-Output "Installer: $(Join-Path $release 'installer\AudioTrackStudio-Setup-1.0.1.exe')"
 }
