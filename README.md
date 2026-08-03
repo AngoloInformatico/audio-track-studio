@@ -107,33 +107,6 @@ py GeneraExe.py
 Gli artefatti vengono generati in `release/` e non sono versionati nel repository. Per una
 distribuzione pubblica è consigliato allegarli a una GitHub Release.
 
-## Pubblicazione su GitHub
-
-Lo script incluso inizializza Git, applica `.gitignore`, controlla file grandi e possibili
-segreti, crea il commit e può creare e pubblicare il repository tramite GitHub CLI:
-
-```powershell
-# Anteprima locale: non crea il repository remoto e non esegue push
-.\scripts\publish_github.ps1 -Repository "account/audio-track-studio"
-
-# Pubblicazione effettiva (repository privato per impostazione predefinita)
-.\scripts\publish_github.ps1 -Repository "account/audio-track-studio" -Publish
-```
-
-Per un repository pubblico aggiungere `-Visibility public`. Lo script usa
-[GitHub CLI](https://cli.github.com/) dal `PATH` oppure dalla posizione locale
-`.tools/gh/gh.exe`; la CLI deve essere autenticata con `gh auth login`.
-
-## Configurazione
-
-Usare `.env.example` come modello e conservare chiavi reali soltanto nel file locale `.env`, che
-è escluso da Git. Le variabili principali sono:
-
-- `ACOUSTID_API_KEY`;
-- `ATS_FFMPEG_BINARY` e `ATS_FFPROBE_BINARY`;
-- `ATS_FPCALC_BINARY`;
-- `ATS_EXPORT_DIR` e `ATS_DATA_DIR`.
-
 ## Documentazione
 
 - [Guida e specifica completa](README_GUIDA.md)
