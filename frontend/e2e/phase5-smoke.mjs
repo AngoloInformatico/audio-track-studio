@@ -23,8 +23,8 @@ try {
   await page.getByRole("button", { name: "Riconosci", exact: true }).click();
   const dialog = page.getByRole("dialog", { name: "Riconoscimento musicale" });
   await dialog.locator(".recognition-prerequisites").waitFor({ timeout: 20_000 });
-  await dialog.getByText("ATS_FPCALC_BINARY", { exact: true }).waitFor();
-  await dialog.getByText("ACOUSTID_API_KEY", { exact: true }).waitFor();
+  const setupReferences = dialog.getByText("Menu → Imposta AcoustID", { exact: true });
+  if (await setupReferences.count() !== 2) throw new Error("Riferimento alla configurazione guidata mancante.");
   const startDisabled = await dialog.getByRole("button", { name: "Riconosci traccia", exact: true }).isDisabled();
   if (!startDisabled) throw new Error("Il riconoscimento dovrebbe essere disabilitato senza prerequisiti.");
   await page.screenshot({ path: screenshotPath, fullPage: true });

@@ -20,7 +20,7 @@ class CoverArtArchiveClient:
             async with httpx.AsyncClient(
                 follow_redirects=True,
                 timeout=30,
-                headers={"User-Agent": "AudioTrackStudio/0.6 (local desktop application)"},
+                headers={"User-Agent": "AudioTrackStudio/1.0.3 (local desktop application)"},
             ) as client, client.stream("GET", url) as response:
                 if response.status_code == 404:
                     return None

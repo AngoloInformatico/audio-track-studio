@@ -2,7 +2,7 @@ interface CopyrightLinkProps {
   className?: string;
 }
 
-export const COPYRIGHT_TEXT = "Created by Alex Lignola - Release 1.0.2  - © 2026 Audio Track Studio - All rights reserved.";
+export const COPYRIGHT_TEXT = "Created by Alex Lignola - Release 1.0.3  - © 2026 Audio Track Studio - All rights reserved.";
 export const COPYRIGHT_URL = "https://www.youtube.com/@AngoloInformatico";
 
 export function CopyrightLink({ className = "" }: CopyrightLinkProps) {

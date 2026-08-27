@@ -483,6 +483,36 @@ input[type="range"] { height: 4px; accent-color: var(--accent); cursor: pointer;
 .prerequisite-grid strong { grid-column: 1; grid-row: 1; font-size: 12px; }
 .prerequisite-grid code { grid-column: 1 / -1; color: var(--text-secondary); font-family: Consolas, monospace; font-size: 11px; }
 .recognition-prerequisites > p { margin: 12px 0 0; color: var(--text-secondary); font-size: 11px; line-height: 1.5; }
+.acoustid-setup-dialog { width: min(760px, calc(100vw - 48px)); }
+.acoustid-setup-icon { background: linear-gradient(135deg, #376f79, var(--accent)); }
+.acoustid-setup-content { padding: 20px 22px 0; }
+.acoustid-complete { display: flex; align-items: center; gap: 13px; margin-bottom: 16px; padding: 14px; color: var(--success); border: 1px solid color-mix(in srgb, var(--success) 35%, var(--border)); border-radius: 10px; background: color-mix(in srgb, var(--success) 9%, var(--surface)); }
+.acoustid-complete > span { display: grid; width: 42px; height: 42px; flex: none; place-items: center; color: white; border-radius: 50%; background: var(--success); }
+.acoustid-complete strong, .acoustid-complete small { display: block; }
+.acoustid-complete strong { margin-bottom: 3px; color: var(--text); font-size: 14px; }
+.acoustid-complete small { color: var(--text-secondary); font-size: 11px; }
+.acoustid-step { margin-top: 14px; padding: 15px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-muted); }
+.acoustid-step.complete { border-color: color-mix(in srgb, var(--success) 28%, var(--border)); }
+.acoustid-step-heading { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; align-items: center; gap: 10px; margin-bottom: 14px; }
+.acoustid-step-number { display: grid; width: 28px; height: 28px; place-items: center; color: white; border-radius: 50%; background: var(--accent); font-size: 12px; font-weight: 800; }
+.acoustid-step.complete .acoustid-step-number { background: var(--success); }
+.acoustid-step-heading strong, .acoustid-step-heading small { display: block; }
+.acoustid-step-heading strong { margin-bottom: 3px; font-size: 13px; }
+.acoustid-step-heading small { color: var(--text-soft); font-size: 10px; line-height: 1.45; }
+.acoustid-step-state { display: inline-flex; align-items: center; gap: 5px; color: var(--text-soft); font-size: 10px; font-weight: 800; text-transform: uppercase; }
+.acoustid-step.complete .acoustid-step-state { color: var(--success); }
+.acoustid-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 11px; }
+.acoustid-actions a { color: var(--accent); font-size: 11px; font-weight: 700; }
+.acoustid-tool-details { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; padding: 10px 11px; color: var(--success); border-radius: 7px; background: color-mix(in srgb, var(--success) 8%, var(--surface)); }
+.acoustid-tool-details span, .acoustid-tool-details strong, .acoustid-tool-details small { display: block; min-width: 0; }
+.acoustid-tool-details strong { color: var(--text); font-size: 11px; }
+.acoustid-tool-details small { margin-top: 3px; overflow: hidden; color: var(--text-soft); font-family: Consolas, monospace; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.button.acoustid-install { width: 100%; min-height: 42px; }
+.acoustid-source-note { margin: 8px 0 0; color: var(--text-soft); font-size: 10px; text-align: center; }
+.acoustid-manual { margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--border); }
+.acoustid-manual summary { color: var(--text-secondary); font-size: 11px; font-weight: 700; cursor: pointer; }
+.acoustid-manual .field { margin: 12px 0 9px; }
+.acoustid-pending { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding: 10px 12px; color: var(--text-secondary); border: 1px solid var(--border); border-radius: 7px; background: var(--surface-muted); font-size: 11px; }
 .recognition-results { padding: 20px 22px 0; }
 .recognition-summary { display: grid; grid-template-columns: repeat(4, 1fr); padding: 13px 5px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-muted); }
 .recognition-summary > div { padding: 0 13px; border-right: 1px solid var(--border); }

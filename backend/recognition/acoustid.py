@@ -38,9 +38,9 @@ class AcoustIDProvider(MusicRecognitionProvider):
         fpcalc_available = version is not None
         key_configured = bool(self.settings.acoustid_api_key)
         if not fpcalc_available:
-            message = "Chromaprint/fpcalc non è disponibile. Configura ATS_FPCALC_BINARY."
+            message = "Chromaprint/fpcalc non è disponibile. Apri Imposta AcoustID nel menu."
         elif not key_configured:
-            message = "Configura ACOUSTID_API_KEY per abilitare il riconoscimento online."
+            message = "Inserisci la chiave applicazione dal menu Imposta AcoustID."
         else:
             message = "Provider AcoustID pronto. I risultati dovranno essere confermati manualmente."
         return RecognitionConfig(
@@ -173,7 +173,7 @@ class AcoustIDProvider(MusicRecognitionProvider):
         try:
             async with httpx.AsyncClient(
                 timeout=self.settings.recognition_timeout_seconds,
-                headers={"User-Agent": "AudioTrackStudio/0.5"},
+                headers={"User-Agent": "AudioTrackStudio/1.0.3"},
             ) as client:
                 response = await client.post(
                     self.settings.acoustid_lookup_url,
@@ -214,7 +214,7 @@ class AcoustIDProvider(MusicRecognitionProvider):
             return None
         try:
             result = await self._run([binary, "-version"], 5)
-        except (FileNotFoundError, RecognitionProviderError):
+        except (OSError, RecognitionProviderError):
             return None
         if result.returncode != 0:
             return None

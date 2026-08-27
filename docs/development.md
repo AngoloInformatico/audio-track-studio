@@ -1,6 +1,6 @@
 # Sviluppo locale
 
-La specifica completa è disponibile in `README_GUIDA.md` nella radice. Questo documento descrive l'avvio delle funzionalità implementate nelle Fasi 1–8 e nella Release 1.0.2.
+La specifica completa è disponibile in `README_GUIDA.md` nella radice. Questo documento descrive l'avvio delle funzionalità implementate nelle Fasi 1–8 e nella Release 1.0.3.
 
 ## Prerequisiti
 
@@ -128,7 +128,7 @@ Disponibile:
 - confini suggeriti con confidenza e indicazione dei segnali rilevati;
 - applicazione esplicita e selettiva dei suggerimenti ai marker esistenti.
 - riconoscimento singolo o batch tramite fingerprint Chromaprint e lookup AcoustID;
-- verifica esplicita dei prerequisiti `ATS_FPCALC_BINARY` e `ACOUSTID_API_KEY`;
+- configurazione guidata della chiave AcoustID e installazione verificata di fpcalc dalla release ufficiale;
 - candidati multipli con confidenza, album/data disponibili e selezione manuale;
 - applicazione atomica e confermata di artista e titolo, con fallback alla modifica inline.
 - editor completo per album, album artist, numeri traccia/disco, data, genere, commento e compositore;

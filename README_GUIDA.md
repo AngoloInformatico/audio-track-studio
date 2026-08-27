@@ -1,8 +1,8 @@
 # Audio Track Studio — Guida e specifica di progetto
 
-> **Release Windows 1.0.2 — Fasi 1–8 complete**
+> **Release Windows 1.0.3 — Fasi 1–8 complete**
 
-![Audio Track Studio Release 1.0](docs/screenshot-release.png)
+![Audio Track Studio Release 1.0.3](docs/screenshot-release.png)
 
 Audio Track Studio è un editor desktop locale per trasformare mix, compilation, concerti e
 registrazioni lunghe in tracce curate. Offre waveform interattiva, marker manuali e suggeriti,
@@ -15,7 +15,7 @@ La distribuzione consigliata è disponibile nella pagina
 [GitHub Releases](https://github.com/AngoloInformatico/audio-track-studio/releases/latest):
 
 ```text
-AUDIO-TRACK-STUDIO-v1.0.2-Windows.zip
+AUDIO-TRACK-STUDIO-v1.0.3-Windows.zip
 ```
 
 Estrarre interamente lo ZIP e avviare `Audio Track Studio.exe` senza separarlo dalla cartella
@@ -44,22 +44,65 @@ sorgente oppure, se manca, il titolo/filename del file importato. Quando il file
 copertina JPEG o PNG incorporata, la stessa immagine viene proposta automaticamente per tutte le
 tracce che non hanno una cover manuale o recuperata online.
 
-## Configurazione utente
+## Configurazione guidata AcoustID
 
-Al primo avvio vengono create cache, log, progetti, recovery e il file:
+Per attivare il riconoscimento musicale sono necessari una **Application API Key** AcoustID e
+`fpcalc`, lo strumento di fingerprinting incluso nel progetto Chromaprint. Audio Track Studio
+permette di configurare entrambi senza modificare manualmente file o variabili di sistema.
+
+1. Avvia Audio Track Studio e seleziona **Imposta AcoustID** nel menu laterale.
+2. Nella sezione **Chiave API AcoustID**, usa il collegamento **Ottieni una chiave gratuita**.
+3. Accedi ad AcoustID e registra Audio Track Studio nella pagina
+   [New Application](https://acoustid.org/new-application).
+4. Copia la **Application API Key** generata. Non usare la User API Key mostrata nel profilo,
+   perché è destinata alla presentazione di nuovi fingerprint e non alle ricerche dell'app.
+5. Incolla la chiave nel campo **Chiave applicazione** e premi **Salva chiave**.
+6. Nella sezione **fpcalc / Chromaprint**, premi
+   **Scarica e configura Chromaprint 1.6.1**. L'app scarica la release ufficiale Windows x64,
+   verifica `fpcalc.exe` e configura automaticamente il percorso interno.
+7. Quando entrambi i requisiti sono validi compare la spunta verde
+   **Configurazione completata**. A questo punto puoi aprire un audio e usare **Riconosci**.
+
+Se `fpcalc.exe` è già installato, espandi **Ho già fpcalc: configura il percorso manualmente**,
+inserisci il percorso completo dell'eseguibile e premi **Verifica e usa percorso**.
+
+La configurazione automatica non modifica il `PATH` di Windows e non richiede privilegi di
+amministratore. Chromaprint viene installato una sola volta in:
+
+```text
+%LOCALAPPDATA%\AudioTrackStudio\tools\chromaprint-1.6.1
+```
+
+La chiave e il percorso vengono memorizzati localmente in:
 
 ```text
 %LOCALAPPDATA%\AudioTrackStudio\config.json
 ```
 
-Per abilitare AcoustID inserire la propria chiave applicazione in `acoustid_api_key`. È possibile
+Questo file si trova fuori dalla cartella del repository e non viene incluso nei commit o nei
+push GitHub. La chiave non viene restituita dall'API locale né mostrata nuovamente
+nell'interfaccia. Non copiare mai una chiave reale in `.env.example`, nel README o nei sorgenti.
+
+L'uso del servizio AcoustID è gratuito per applicazioni non commerciali, nel rispetto delle
+[linee guida del Web Service](https://acoustid.org/webservice). Il riconoscimento richiede una
+connessione Internet; fingerprinting, analisi ed elaborazione audio restano locali.
+
+## Configurazione utente avanzata
+
+Al primo avvio vengono creati log, progetti, recovery e il file:
+
+```text
+%LOCALAPPDATA%\AudioTrackStudio\config.json
+```
+
+La finestra **Imposta AcoustID** aggiorna `acoustid_api_key` e `fpcalc_path`. È possibile
 impostare anche `export_directory`. Le variabili `ACOUSTID_API_KEY`, `ATS_EXPORT_DIR`,
 `ATS_DATA_DIR`, `ATS_FFMPEG_BINARY`, `ATS_FFPROBE_BINARY` e `ATS_FPCALC_BINARY` hanno priorità
 sul file locale e sono pensate soprattutto per sviluppo e diagnostica.
 
-`fpcalc`/Chromaprint non è incorporato nella release corrente: se non viene configurato,
-l'interfaccia indica chiaramente che il riconoscimento non è disponibile e tutte le funzioni
-manuali restano operative.
+`fpcalc`/Chromaprint viene scaricato soltanto su richiesta tramite il menu e non è duplicato a
+ogni analisi. Se non viene configurato, l'interfaccia indica chiaramente che il riconoscimento
+non è disponibile e tutte le funzioni manuali restano operative.
 
 ## Sviluppo e build
 
@@ -99,8 +142,8 @@ $env:ATS_SMOKE_REPORT = "C:\tmp\ats-smoke.json"
   `%LOCALAPPDATA%\AudioTrackStudio\logs\audio-track-studio.log`.
 - **FFmpeg non disponibile:** nella release ufficiale deve essere incorporato; eseguire lo smoke
   test e verificare che `_internal\tools` contenga `ffmpeg.exe` e `ffprobe.exe`.
-- **Recognition non disponibile:** configurare chiave AcoustID e `fpcalc`; l'editing manuale non
-  richiede questi prerequisiti.
+- **Recognition non disponibile:** aprire **Imposta AcoustID** e verificare che entrambe le righe
+  mostrino lo stato pronto e la spunta verde; l'editing manuale non richiede questi prerequisiti.
 - **Progetto con sorgente spostata:** selezionare la nuova posizione dello stesso file; dimensione,
   durata e SHA-256 vengono controllati prima del ripristino.
 

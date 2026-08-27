@@ -1,7 +1,7 @@
 {
   "name": "audio-track-studio-frontend",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
@@ -12,6 +12,7 @@
     "e2e:phase5": "node e2e/phase5-smoke.mjs",
     "e2e:phase6": "node e2e/phase6-smoke.mjs",
     "e2e:phase7": "node e2e/phase7-smoke.mjs",
+    "e2e:acoustid-setup": "node e2e/acoustid-setup-smoke.mjs",
     "e2e:empty-layout": "node e2e/empty-layout-smoke.mjs",
     "lint": "eslint .",
     "test": "vitest run"

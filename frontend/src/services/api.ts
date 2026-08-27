@@ -1,4 +1,6 @@
 import type {
+  AcoustIDSetupStatus,
+  AcoustIDSetupUpdate,
   AnalysisConfig,
   AnalysisOptions,
   AnalysisResult,
@@ -199,6 +201,25 @@ export async function startAnalysis(options: AnalysisOptions): Promise<JobView<A
 
 export async function getRecognitionConfig(): Promise<RecognitionConfig> {
   return request<RecognitionConfig>(`${API_ROOT}/recognition/config`);
+}
+
+export async function getAcoustIDSetup(): Promise<AcoustIDSetupStatus> {
+  return request<AcoustIDSetupStatus>(`${API_ROOT}/recognition/setup`);
+}
+
+export async function updateAcoustIDSetup(
+  update: AcoustIDSetupUpdate,
+): Promise<AcoustIDSetupStatus> {
+  return request<AcoustIDSetupStatus>(`${API_ROOT}/recognition/setup`, {
+    method: "PUT",
+    body: JSON.stringify(update),
+  });
+}
+
+export async function installFpcalc(): Promise<AcoustIDSetupStatus> {
+  return request<AcoustIDSetupStatus>(`${API_ROOT}/recognition/setup/install-fpcalc`, {
+    method: "POST",
+  });
 }
 
 export async function startRecognition(

@@ -55,4 +55,5 @@ def test_first_start_creates_default_user_configuration(tmp_path: Path) -> None:
 
     assert settings.config_file.is_file()
     assert '"acoustid_api_key": ""' in settings.config_file.read_text(encoding="utf-8")
+    assert '"fpcalc_path": ""' in settings.config_file.read_text(encoding="utf-8")
     assert settings.cache_dir == tmp_path / "runtime" / "cache"

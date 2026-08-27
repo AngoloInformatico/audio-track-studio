@@ -6,8 +6,11 @@ import tempfile
 from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
+from threading import Lock
 
 from backend.core.resources import configured_tool
+
+_CONFIG_LOCK = Lock()
 
 
 def _default_data_dir() -> Path:
@@ -43,6 +46,16 @@ def _default_acoustid_key() -> str:
     return saved.strip() if isinstance(saved, str) else ""
 
 
+def _default_fpcalc_binary() -> str:
+    configured = os.getenv("ATS_FPCALC_BINARY", "").strip()
+    if configured:
+        return str(Path(configured).expanduser())
+    saved = _read_user_config().get("fpcalc_path")
+    if isinstance(saved, str) and saved.strip():
+        return str(Path(saved).expanduser())
+    return configured_tool("ATS_FPCALC_BINARY", "fpcalc")
+
+
 def _read_user_config() -> dict[str, object]:
     path = _default_data_dir() / "config.json"
     try:
@@ -50,6 +63,20 @@ def _read_user_config() -> dict[str, object]:
     except (OSError, UnicodeDecodeError, json.JSONDecodeError):
         return {}
     return payload if isinstance(payload, dict) else {}
+
+
+def update_user_config(updates: dict[str, object]) -> None:
+    """Merge user settings and replace config.json atomically."""
+
+    path = _default_data_dir() / "config.json"
+    with _CONFIG_LOCK:
+        payload = _read_user_config()
+        payload.update(updates)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = path.with_suffix(".json.tmp")
+        temporary.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        os.replace(temporary, path)
+    get_settings.cache_clear()
 
 
 @dataclass(frozen=True, slots=True)
@@ -65,7 +92,7 @@ class Settings:
         default_factory=lambda: configured_tool("ATS_FFPROBE_BINARY", "ffprobe")
     )
     fpcalc_binary: str = field(
-        default_factory=lambda: configured_tool("ATS_FPCALC_BINARY", "fpcalc")
+        default_factory=_default_fpcalc_binary
     )
     acoustid_api_key: str = field(default_factory=_default_acoustid_key)
     acoustid_lookup_url: str = "https://api.acoustid.org/v2/lookup"
@@ -111,7 +138,7 @@ class Settings:
             temporary = self.config_file.with_suffix(".json.tmp")
             temporary.write_text(
                 json.dumps(
-                    {"acoustid_api_key": "", "export_directory": ""},
+                    {"acoustid_api_key": "", "fpcalc_path": "", "export_directory": ""},
                     indent=2,
                 ),
                 encoding="utf-8",

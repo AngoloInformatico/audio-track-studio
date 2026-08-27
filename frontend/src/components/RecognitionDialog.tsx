@@ -162,10 +162,10 @@ function RecognitionPrerequisites({ config }: { config: RecognitionConfig }) {
     <div className="recognition-prerequisites" role="status">
       <div className="prerequisite-heading"><Icon name="info" size={18} /><span><strong>Configurazione richiesta</strong><small>{config.message}</small></span></div>
       <div className="prerequisite-grid">
-        <div className={config.fpcalc_available ? "ready" : "missing"}><span>{config.fpcalc_available ? "Pronto" : "Manca"}</span><strong>Chromaprint / fpcalc</strong><code>ATS_FPCALC_BINARY</code></div>
-        <div className={config.api_key_configured ? "ready" : "missing"}><span>{config.api_key_configured ? "Pronta" : "Manca"}</span><strong>Chiave applicazione AcoustID</strong><code>ACOUSTID_API_KEY</code></div>
+        <div className={config.fpcalc_available ? "ready" : "missing"}><span>{config.fpcalc_available ? "Pronto" : "Manca"}</span><strong>Chromaprint / fpcalc</strong><code>Menu → Imposta AcoustID</code></div>
+        <div className={config.api_key_configured ? "ready" : "missing"}><span>{config.api_key_configured ? "Pronta" : "Manca"}</span><strong>Chiave applicazione AcoustID</strong><code>Menu → Imposta AcoustID</code></div>
       </div>
-      <p>Il riconoscimento richiede il servizio online AcoustID. Puoi chiudere questa finestra e continuare a modificare artista e titolo manualmente.</p>
+      <p>Apri “Imposta AcoustID” nel menu laterale per completare automaticamente la configurazione. Il riconoscimento richiede una connessione Internet.</p>
     </div>
   );
 }

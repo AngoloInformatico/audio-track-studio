@@ -22,6 +22,22 @@ class RecognitionConfig(BaseModel):
     message: str
 
 
+class AcoustIDSetupUpdate(BaseModel):
+    acoustid_api_key: str | None = Field(default=None, min_length=1, max_length=200)
+    fpcalc_path: str | None = Field(default=None, min_length=1, max_length=1000)
+
+
+class AcoustIDSetupStatus(BaseModel):
+    available: bool
+    api_key_configured: bool
+    fpcalc_available: bool
+    fpcalc_version: str | None = None
+    fpcalc_path: str
+    fpcalc_managed: bool
+    chromaprint_version: str
+    message: str
+
+
 class RecognitionCandidate(BaseModel):
     artist: str
     title: str

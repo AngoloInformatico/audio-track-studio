@@ -170,6 +170,22 @@ export interface RecognitionConfig {
   message: string;
 }
 
+export interface AcoustIDSetupStatus {
+  available: boolean;
+  api_key_configured: boolean;
+  fpcalc_available: boolean;
+  fpcalc_version: string | null;
+  fpcalc_path: string;
+  fpcalc_managed: boolean;
+  chromaprint_version: string;
+  message: string;
+}
+
+export interface AcoustIDSetupUpdate {
+  acoustid_api_key?: string;
+  fpcalc_path?: string;
+}
+
 export interface RecognitionCandidate {
   artist: string;
   title: string;

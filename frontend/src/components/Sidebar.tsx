@@ -2,17 +2,19 @@ import { Icon, type IconName } from "./Icon";
 
 interface SidebarProps {
   backendOnline: boolean;
+  onAcoustIDSetup: () => void;
   onProjects: () => void;
   onAbout: () => void;
 }
 
-const items: Array<{ label: string; icon: IconName; action?: "projects" | "about" }> = [
+const items: Array<{ label: string; icon: IconName; action?: "projects" | "acoustid" | "about" }> = [
   { label: "Editor", icon: "home" },
   { label: "Progetti", icon: "folder", action: "projects" },
+  { label: "Imposta AcoustID", icon: "settings", action: "acoustid" },
   { label: "Informazioni", icon: "info", action: "about" },
 ];
 
-export function Sidebar({ backendOnline, onProjects, onAbout }: SidebarProps) {
+export function Sidebar({ backendOnline, onAcoustIDSetup, onProjects, onAbout }: SidebarProps) {
   return (
     <aside className="sidebar">
       <div className="brand" aria-label="Audio Track Studio">
@@ -24,7 +26,7 @@ export function Sidebar({ backendOnline, onProjects, onAbout }: SidebarProps) {
           <button
             className={item.label === "Editor" ? "nav-item active" : "nav-item"}
             key={item.label}
-            onClick={item.action === "projects" ? onProjects : item.action === "about" ? onAbout : undefined}
+            onClick={item.action === "projects" ? onProjects : item.action === "acoustid" ? onAcoustIDSetup : item.action === "about" ? onAbout : undefined}
             type="button"
           >
             <Icon name={item.icon} size={19} />
@@ -37,7 +39,7 @@ export function Sidebar({ backendOnline, onProjects, onAbout }: SidebarProps) {
           <span className="status-dot" />
           Backend {backendOnline ? "connesso" : "non raggiungibile"}
         </div>
-        <span className="version">Release · v1.0.2</span>
+        <span className="version">Release · v1.0.3</span>
       </div>
     </aside>
   );

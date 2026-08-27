@@ -16,7 +16,7 @@ export function AboutDialog({ onClose }: AboutDialogProps) {
       <section aria-labelledby="about-title" aria-modal="true" className="export-dialog about-dialog" role="dialog">
         <header className="dialog-header">
           <div className="dialog-title-icon about-icon"><Icon name="waveform" size={23} /></div>
-          <div><span className="section-kicker"><span /> RELEASE WINDOWS</span><h2 id="about-title">Audio Track Studio</h2><p>Versione 1.0.2 · Fasi 1–8 complete</p></div>
+          <div><span className="section-kicker"><span /> RELEASE WINDOWS</span><h2 id="about-title">Audio Track Studio</h2><p>Versione 1.0.3 · Fasi 1–8 complete</p></div>
           <button aria-label="Chiudi informazioni" className="dialog-close" onClick={onClose} type="button"><Icon name="x" /></button>
         </header>
         <div className="about-content">

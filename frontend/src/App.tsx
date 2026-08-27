@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { AudioWorkspace } from "./components/AudioWorkspace";
+import { AcoustIDSetupDialog } from "./components/AcoustIDSetupDialog";
 import { AboutDialog } from "./components/AboutDialog";
 import { CopyrightLink } from "./components/CopyrightLink";
 import { ExportDialog } from "./components/ExportDialog";
@@ -34,6 +35,7 @@ export default function App() {
   const [recognitionOpen, setRecognitionOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [acoustIDSetupOpen, setAcoustIDSetupOpen] = useState(false);
   const [saveDialog, setSaveDialog] = useState<{ saveAs: boolean }>();
   const [activeProject, setActiveProject] = useState<ActiveProject>();
   const [projectError, setProjectError] = useState<string>();
@@ -126,7 +128,7 @@ export default function App() {
   };
 
   const backendOnline = health?.status === "ok" && health.tools.ffprobe?.available === true;
-  const anyModalOpen = exportOpen || analysisOpen || recognitionOpen || projectsOpen || aboutOpen || Boolean(saveDialog);
+  const anyModalOpen = exportOpen || analysisOpen || recognitionOpen || projectsOpen || aboutOpen || acoustIDSetupOpen || Boolean(saveDialog);
   return (
     <div className="app-shell">
       <input
@@ -142,7 +144,7 @@ export default function App() {
         ref={fileInputRef}
         type="file"
       />
-      <Sidebar backendOnline={backendOnline} onAbout={() => setAboutOpen(true)} onProjects={() => setProjectsOpen(true)} />
+      <Sidebar backendOnline={backendOnline} onAcoustIDSetup={() => setAcoustIDSetupOpen(true)} onAbout={() => setAboutOpen(true)} onProjects={() => setProjectsOpen(true)} />
       <div className={`app-main ${session ? "has-session" : "empty"}`}>
         <Topbar
           canAnalyze={Boolean(session)}
@@ -187,6 +189,7 @@ export default function App() {
       </div>
       {session && exportOpen && <ExportDialog onClose={() => setExportOpen(false)} session={session} />}
       {aboutOpen && <AboutDialog onClose={() => setAboutOpen(false)} />}
+      {acoustIDSetupOpen && <AcoustIDSetupDialog onClose={() => setAcoustIDSetupOpen(false)} />}
       {projectsOpen && (
         <ProjectsDialog
           hasSession={Boolean(session)}
