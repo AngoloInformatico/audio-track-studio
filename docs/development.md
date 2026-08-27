@@ -82,24 +82,24 @@ riapre lo stesso progetto ricollegando la sorgente audio:
 npm run e2e:phase7 -- "C:\percorso\audio.wav" "C:\percorso\cover.jpg" "C:\tmp\ats-phase7.png"
 ```
 
-## Build desktop e installer — Fase 8
+## Build desktop portabile — Fase 8
 
 La build Windows usa pywebview/WebView2 e PyInstaller in modalità one-folder. Il frontend statico,
 FFmpeg, ffprobe, icona e licenze vengono incorporati automaticamente:
 
 ```powershell
-.\scripts\build_release.ps1 -Installer
+.\scripts\build_release.ps1
 ```
 
-Senza `-Installer` viene prodotta soltanto la cartella portabile. Inno Setup 6 può essere indicato
-con `ATS_ISCC_BINARY`; FFmpeg/ffprobe possono essere indicati con i rispettivi override `ATS_*`.
+La distribuzione viene creata in `dist\Audio Track Studio`. FFmpeg/ffprobe possono essere
+indicati con i rispettivi override `ATS_*`.
 
 Lo smoke test dell'eseguibile non apre finestre e non usa Python o FFmpeg esterni:
 
 ```powershell
 $env:ATS_DATA_DIR = "C:\tmp\ats-release-smoke\data"
 $env:ATS_SMOKE_REPORT = "C:\tmp\ats-release-smoke\report.json"
-& ".\release\Audio Track Studio\Audio Track Studio.exe" --smoke-test
+& ".\dist\Audio Track Studio\Audio Track Studio.exe" --smoke-test
 ```
 
 ## Stato delle Fasi 1–8

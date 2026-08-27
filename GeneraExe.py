@@ -1,4 +1,4 @@
-"""Rigenera la versione portabile e l'installer di Audio Track Studio."""
+"""Rigenera la distribuzione portabile di Audio Track Studio."""
 
 from __future__ import annotations
 
@@ -36,7 +36,6 @@ def main() -> int:
         "Bypass",
         "-File",
         str(build_script),
-        "-Installer",
     ]
 
     print("Rigenerazione di Audio Track Studio in corso...")
@@ -58,11 +57,7 @@ def main() -> int:
     print("\nBuild completata correttamente.")
     print(
         "Versione portabile: "
-        "release\\Audio Track Studio\\Audio Track Studio.exe"
-    )
-    print(
-        "Installer: "
-        "release\\installer\\AudioTrackStudio-Setup-1.0.2.exe"
+        "dist\\Audio Track Studio\\Audio Track Studio.exe"
     )
     return 0
 

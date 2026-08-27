@@ -28,7 +28,7 @@ DisableProgramGroupPage=yes
 Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
 
 [Files]
-Source: "..\release\Audio Track Studio\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\dist\Audio Track Studio\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "MicrosoftEdgeWebview2Setup.exe"; DestDir: "{tmp}"; Flags: deleteafterinstall; Check: not IsWebView2Installed
 
 [Icons]

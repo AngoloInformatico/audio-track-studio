@@ -9,25 +9,18 @@ registrazioni lunghe in tracce curate. Offre waveform interattiva, marker manual
 riconoscimento musicale opzionale, metadati e cover, esportazione lossless e progetti
 `.atsproject` recuperabili.
 
-## Installazione Windows
+## Versione portabile Windows
 
 La distribuzione consigliata è disponibile nella pagina
 [GitHub Releases](https://github.com/AngoloInformatico/audio-track-studio/releases/latest):
 
 ```text
-AudioTrackStudio-Setup-1.0.2.exe
+AUDIO-TRACK-STUDIO-v1.0.2-Windows.zip
 ```
 
-L'installer è per Windows 10/11 x64, non richiede privilegi amministrativi e installa
-l'applicazione nel profilo dell'utente. Python, Node.js, npm, FFmpeg e ffprobe non sono richiesti:
-sono già inclusi nella release. Se Microsoft Edge WebView2 Runtime non è presente, il setup
-esegue il bootstrapper Evergreen ufficiale Microsoft incluso nel pacchetto.
-
-È disponibile anche la versione portabile:
-
-```text
-AudioTrackStudio-Portable-1.0.2.zip
-```
+Estrarre interamente lo ZIP e avviare `Audio Track Studio.exe` senza separarlo dalla cartella
+`_internal`. Python, Node.js, npm, FFmpeg e ffprobe non sono richiesti perché sono inclusi.
+È necessario Microsoft Edge WebView2 Runtime, normalmente già presente in Windows 10/11.
 
 La release non è firmata con un certificato Authenticode commerciale; Windows SmartScreen può
 quindi mostrare un avviso al primo avvio. Verificare che il file provenga dal canale di
@@ -70,14 +63,14 @@ manuali restano operative.
 
 ## Sviluppo e build
 
-Prerequisiti di sviluppo: Python 3.11+, Node.js 20.19+, FFmpeg/ffprobe e, per generare il setup,
-Inno Setup 6. Dopo aver creato `.venv` e installato `requirements-dev.txt`:
+Prerequisiti di sviluppo: Python 3.11+, Node.js 20.19+ e FFmpeg/ffprobe. Dopo aver creato
+`.venv` e installato `requirements-dev.txt`:
 
 ```powershell
 cd frontend
 npm install
 cd ..
-.\scripts\build_release.ps1 -Installer
+.\scripts\build_release.ps1
 ```
 
 In alternativa, da Python puoi avviare la stessa pipeline completa con:
@@ -87,22 +80,21 @@ py GeneraExe.py
 ```
 
 `GeneraExe.py` individua automaticamente la cartella del progetto ed esegue
-`scripts\build_release.ps1 -Installer`.
+`scripts\build_release.ps1`.
 
-La pipeline esegue test, Ruff, ESLint, Vitest, build Vite, PyInstaller e Inno Setup. Usa
-obbligatoriamente [Icon/icon.ico](Icon/icon.ico) per eseguibile e installer. Per verificare una
-release senza aprire la GUI:
+La pipeline esegue test, Ruff, ESLint, Vitest, build Vite e PyInstaller. Usa obbligatoriamente
+[Icon/icon.ico](Icon/icon.ico) per l'eseguibile. Per verificare una release senza aprire la GUI:
 
 ```powershell
 $env:ATS_SMOKE_REPORT = "C:\tmp\ats-smoke.json"
-& ".\release\Audio Track Studio\Audio Track Studio.exe" --smoke-test
+& ".\dist\Audio Track Studio\Audio Track Studio.exe" --smoke-test
 ```
 
 ## Risoluzione problemi
 
 - **SmartScreen segnala un'app sconosciuta:** la release non è firmata; distribuire tramite un
   canale fidato oppure applicare un certificato Authenticode nella propria pipeline.
-- **La finestra non si apre:** reinstallare Microsoft Edge WebView2 Runtime o rieseguire il setup.
+- **La finestra non si apre:** installare o ripristinare Microsoft Edge WebView2 Runtime.
 - **Backend non connesso:** consultare
   `%LOCALAPPDATA%\AudioTrackStudio\logs\audio-track-studio.log`.
 - **FFmpeg non disponibile:** nella release ufficiale deve essere incorporato; eseguire lo smoke
@@ -118,7 +110,7 @@ $env:ATS_SMOKE_REPORT = "C:\tmp\ats-smoke.json"
 backend/       API, audio, analisi, recognition, export e progetti
 frontend/      interfaccia React/TypeScript
 desktop/       wrapper pywebview e server locale lifecycle-managed
-packaging/     specifica PyInstaller, metadata Windows e installer Inno Setup
+packaging/     specifica PyInstaller e metadata Windows
 scripts/       pipeline di build della release
 Icon/          icona Windows canonica
 docs/          guida sviluppo e screenshot
@@ -132,4 +124,3 @@ file `LICENSE` nella radice. Dipendenze e binari mantengono le rispettive licenz
 GPLv3 e viene distribuita insieme al relativo testo di licenza e ai riferimenti al codice sorgente.
 
 ---
-

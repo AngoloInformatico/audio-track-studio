@@ -8,6 +8,7 @@ $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $python = Join-Path $projectRoot '.venv\Scripts\python.exe'
 $icon = Join-Path $projectRoot 'Icon\icon.ico'
 $frontend = Join-Path $projectRoot 'frontend'
+$dist = Join-Path $projectRoot 'dist'
 $release = Join-Path $projectRoot 'release'
 
 if (-not (Test-Path -LiteralPath $python)) { throw 'Ambiente virtuale .venv non trovato.' }
@@ -35,11 +36,11 @@ try {
 
 Push-Location $projectRoot
 try {
-    & $python -B -m PyInstaller --noconfirm --clean --distpath $release --workpath (Join-Path $projectRoot 'build\pyinstaller') 'packaging\audio_track_studio.spec'
+    & $python -B -m PyInstaller --noconfirm --clean --distpath $dist --workpath (Join-Path $projectRoot 'build\pyinstaller') 'packaging\audio_track_studio.spec'
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 } finally { Pop-Location }
 
-$executable = Join-Path $release 'Audio Track Studio\Audio Track Studio.exe'
+$executable = Join-Path $dist 'Audio Track Studio\Audio Track Studio.exe'
 if (-not (Test-Path -LiteralPath $executable)) { throw 'Build desktop non generata.' }
 Write-Output "Release desktop: $executable"
 

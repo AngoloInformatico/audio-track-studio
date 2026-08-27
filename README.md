@@ -6,7 +6,7 @@
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078d4?style=for-the-badge&logo=windows11&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776ab?style=for-the-badge&logo=python&logoColor=white)
 ![React](https://img.shields.io/badge/React-TypeScript-20232a?style=for-the-badge&logo=react&logoColor=61dafb)
-[![Licenza](https://img.shields.io/badge/licenza-MIT-2ea44f?style=for-the-badge)](LICENSE)
+[![Licenza](https://img.shields.io/badge/licenza-GPLv3-2ea44f?style=for-the-badge)](LICENSE)
 
 ![Audio Track Studio Release 1.0.2](docs/screenshot-release.png)
 
@@ -29,12 +29,11 @@ modificato e le tracce vengono esportate in FLAC lossless.
 
 ## Download
 
-Scarica l'installer Windows oppure la versione portabile dalla pagina
+Scarica la versione portabile dalla pagina
 [GitHub Releases](https://github.com/AngoloInformatico/audio-track-studio/releases/latest).
 
-- `AudioTrackStudio-Setup-1.0.2.exe`: installazione consigliata per Windows 10/11 x64;
-- `AudioTrackStudio-Portable-1.0.2.zip`: applicazione completa da estrarre e avviare;
-- `SHA256SUMS.txt`: checksum per verificare l'integrità dei download.
+- `AUDIO-TRACK-STUDIO-v1.0.2-Windows.zip`: applicazione completa per Windows 10/11 x64,
+  da estrarre interamente prima dell'avvio.
 
 La release non è firmata con un certificato Authenticode commerciale; Windows SmartScreen può
 mostrare un avviso al primo avvio.
@@ -45,7 +44,7 @@ mostrare un avviso al primo avvio.
 backend/       API FastAPI, audio, analisi, recognition, export e progetti
 frontend/      interfaccia React e TypeScript
 desktop/       wrapper pywebview e server locale
-packaging/     configurazione PyInstaller e installer Inno Setup
+packaging/     configurazione PyInstaller e metadati Windows
 scripts/       strumenti di build e pubblicazione
 Icon/          icona Windows
 docs/          documentazione di sviluppo e screenshot
@@ -98,10 +97,10 @@ npm run build
 
 ## Build Windows
 
-Per creare la versione portabile e, se Inno Setup 6 è installato, l'installer:
+Per creare la versione portabile:
 
 ```powershell
-.\scripts\build_release.ps1 -Installer
+.\scripts\build_release.ps1
 ```
 
 In alternativa:
@@ -110,8 +109,9 @@ In alternativa:
 py GeneraExe.py
 ```
 
-Gli artefatti vengono generati in `release/` e non sono versionati nel repository. Per una
-distribuzione pubblica è consigliato allegarli a una GitHub Release.
+La versione portabile viene generata in `dist/Audio Track Studio/`, pronta per essere
+compressa e pubblicata da GitPilot. La directory `dist/` è un artefatto locale e non è
+versionata nel repository.
 
 ## Documentazione
 
