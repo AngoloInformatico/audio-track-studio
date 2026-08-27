@@ -143,3 +143,6 @@ Audio Track Studio è distribuito con licenza
 [GNU General Public License v3.0](LICENSE). Puoi usare, studiare, modificare e ridistribuire il
 software nel rispetto dei termini della GPLv3. Le dipendenze e i binari di terze parti mantengono
 le rispettive licenze indicate in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+
+**Created by Alex Lignola**  
+**Copyright © 2026 Alex Lignola**
