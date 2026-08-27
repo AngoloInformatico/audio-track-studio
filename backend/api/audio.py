@@ -46,6 +46,12 @@ async def open_audio(file: Annotated[UploadFile, File()]) -> AudioSession:
             default_artist=source_metadata.artist,
             source_cover=source_cover,
         )
+        for stale_id in library.ids():
+            if stale_id == imported.id:
+                continue
+            await library.remove(stale_id)
+            CoverStore.instance().remove_session(stale_id)
+            TrackStore.instance().remove(stale_id)
         return AudioSession(id=imported.id, info=info, stream_url=f"/api/audio/{imported.id}/stream")
     except AudioLibraryError as exc:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
@@ -71,7 +77,12 @@ async def stream_audio(audio_id: str) -> FileResponse:
         item = AudioLibrary.instance().get(audio_id)
     except AudioLibraryError as exc:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
-    return FileResponse(item.path, media_type=item.media_type, filename=item.original_name)
+    return FileResponse(
+        item.path,
+        media_type=item.media_type,
+        filename=item.original_name,
+        headers={"Cache-Control": "no-store, max-age=0"},
+    )
 
 
 @router.delete("/{audio_id}", status_code=status.HTTP_204_NO_CONTENT)

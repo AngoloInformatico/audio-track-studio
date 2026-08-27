@@ -45,9 +45,14 @@ def test_source_smoke_test_writes_a_success_report(tmp_path: Path) -> None:
 
 
 def test_first_start_creates_default_user_configuration(tmp_path: Path) -> None:
-    settings = Settings(data_dir=tmp_path / "data", default_export_dir=tmp_path / "exports")
+    settings = Settings(
+        data_dir=tmp_path / "data",
+        runtime_dir=tmp_path / "runtime",
+        default_export_dir=tmp_path / "exports",
+    )
 
     settings.ensure_directories()
 
     assert settings.config_file.is_file()
     assert '"acoustid_api_key": ""' in settings.config_file.read_text(encoding="utf-8")
+    assert settings.cache_dir == tmp_path / "runtime" / "cache"

@@ -16,9 +16,11 @@ from backend.api.jobs import router as jobs_router
 from backend.api.projects import router as projects_router
 from backend.api.recognition import router as recognition_router
 from backend.api.tracks import router as tracks_router
+from backend.audio.library import AudioLibrary
 from backend.core.config import get_settings
 from backend.core.logging import configure_logging, get_logger
 from backend.core.resources import resource_path
+from backend.core.transient import clear_legacy_transient_storage, reset_audio_cache
 
 
 @asynccontextmanager
@@ -27,10 +29,16 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 
     configure_logging()
     settings = get_settings()
+    clear_legacy_transient_storage(settings)
+    reset_audio_cache(settings)
     settings.ensure_directories()
     get_logger(__name__).info("Audio Track Studio backend started")
-    yield
-    get_logger(__name__).info("Audio Track Studio backend stopped")
+    try:
+        yield
+    finally:
+        await AudioLibrary.instance().clear()
+        reset_audio_cache(settings)
+        get_logger(__name__).info("Audio Track Studio backend stopped")
 
 
 settings = get_settings()

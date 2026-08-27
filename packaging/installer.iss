@@ -1,5 +1,5 @@
 #define MyAppName "Audio Track Studio"
-#define MyAppVersion "1.0.1"
+#define MyAppVersion "1.0.2"
 #define MyAppExeName "Audio Track Studio.exe"
 #define WebView2Guid "{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}"
 

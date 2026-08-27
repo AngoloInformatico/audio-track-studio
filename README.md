@@ -2,7 +2,13 @@
 
 > Editor desktop locale per suddividere registrazioni audio lunghe in tracce curate.
 
-![Audio Track Studio Release 1.0](docs/screenshot-release.png)
+[![Versione](https://img.shields.io/badge/versione-1.0.2-2f81f7?style=for-the-badge)](https://github.com/AngoloInformatico/audio-track-studio/releases/latest)
+![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078d4?style=for-the-badge&logo=windows11&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.11%2B-3776ab?style=for-the-badge&logo=python&logoColor=white)
+![React](https://img.shields.io/badge/React-TypeScript-20232a?style=for-the-badge&logo=react&logoColor=61dafb)
+[![Licenza](https://img.shields.io/badge/licenza-MIT-2ea44f?style=for-the-badge)](LICENSE)
+
+![Audio Track Studio Release 1.0.2](docs/screenshot-release.png)
 
 Audio Track Studio combina waveform interattiva, marker manuali e suggeriti, metadati,
 copertine e progetti recuperabili in un'applicazione Windows. Il file sorgente non viene mai
@@ -26,8 +32,8 @@ modificato e le tracce vengono esportate in FLAC lossless.
 Scarica l'installer Windows oppure la versione portabile dalla pagina
 [GitHub Releases](https://github.com/AngoloInformatico/audio-track-studio/releases/latest).
 
-- `AudioTrackStudio-Setup-1.0.1.exe`: installazione consigliata per Windows 10/11 x64;
-- `AudioTrackStudio-Portable-1.0.1.zip`: applicazione completa da estrarre e avviare;
+- `AudioTrackStudio-Setup-1.0.2.exe`: installazione consigliata per Windows 10/11 x64;
+- `AudioTrackStudio-Portable-1.0.2.zip`: applicazione completa da estrarre e avviare;
 - `SHA256SUMS.txt`: checksum per verificare l'integrità dei download.
 
 La release non è firmata con un certificato Authenticode commerciale; Windows SmartScreen può

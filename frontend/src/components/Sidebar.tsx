@@ -37,7 +37,7 @@ export function Sidebar({ backendOnline, onProjects, onAbout }: SidebarProps) {
           <span className="status-dot" />
           Backend {backendOnline ? "connesso" : "non raggiungibile"}
         </div>
-        <span className="version">Release · v1.0.1</span>
+        <span className="version">Release · v1.0.2</span>
       </div>
     </aside>
   );

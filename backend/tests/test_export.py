@@ -37,7 +37,11 @@ def test_export_rejects_duplicate_and_existing_names(tmp_path: Path) -> None:
 
 
 def test_export_destination_must_not_be_cache_or_disk_root(tmp_path: Path) -> None:
-    settings = Settings(data_dir=tmp_path / "app", default_export_dir=tmp_path / "out")
+    settings = Settings(
+        data_dir=tmp_path / "app",
+        runtime_dir=tmp_path / "runtime",
+        default_export_dir=tmp_path / "out",
+    )
     service = ExportService(settings)
     settings.cache_dir.mkdir(parents=True)
 

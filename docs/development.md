@@ -1,6 +1,6 @@
 # Sviluppo locale
 
-La specifica completa è disponibile in `README_GUIDA.md` nella radice. Questo documento descrive l'avvio delle funzionalità implementate nelle Fasi 1–8 e nella Release 1.0.1.
+La specifica completa è disponibile in `README_GUIDA.md` nella radice. Questo documento descrive l'avvio delle funzionalità implementate nelle Fasi 1–8 e nella Release 1.0.2.
 
 ## Prerequisiti
 

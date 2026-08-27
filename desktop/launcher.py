@@ -9,17 +9,21 @@ from pathlib import Path
 
 from backend.core.config import get_settings
 from backend.core.resources import resource_path
+from backend.core.transient import clear_runtime_storage, reset_webview_cache
 from desktop.server import DesktopServer
 
 
 def run() -> int:
     multiprocessing.freeze_support()
     server: DesktopServer | None = None
+    settings = get_settings()
     try:
         frontend = resource_path("frontend", "dist", "index.html")
         if not frontend.is_file():
             raise RuntimeError("Frontend non trovato. Esegui prima la build di produzione.")
-        get_settings().ensure_directories()
+        clear_runtime_storage(settings)
+        settings.ensure_directories()
+        reset_webview_cache(settings)
         server = DesktopServer()
         server.start()
 
@@ -40,7 +44,7 @@ def run() -> int:
             gui="edgechromium",
             debug=False,
             private_mode=False,
-            storage_path=str(get_settings().data_dir / "webview"),
+            storage_path=str(settings.webview_dir),
         )
         return 0
     except Exception as exc:
@@ -49,6 +53,7 @@ def run() -> int:
     finally:
         if server is not None:
             server.stop()
+        clear_runtime_storage(settings)
 
 
 def run_smoke_test(report_path: Path | None = None) -> int:

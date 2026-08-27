@@ -2,6 +2,8 @@
 
 import os
 import shutil
+import subprocess
+import tempfile
 from pathlib import Path
 
 root = Path(SPEC).resolve().parent.parent
@@ -14,12 +16,65 @@ if not icon.is_file():
     raise SystemExit("Icon/icon.ico non trovato.")
 
 
+def works_after_copy(source):
+    """Reject package-manager shims that break once moved into the release."""
+
+    try:
+        with tempfile.TemporaryDirectory(prefix="ats-tool-check-") as temporary:
+            copied = Path(temporary) / source.name
+            shutil.copy2(source, copied)
+            result = subprocess.run(
+                [str(copied), "-version"],
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                timeout=15,
+                check=False,
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+            )
+            return result.returncode == 0
+    except (OSError, subprocess.SubprocessError):
+        return False
+
+
+def path_candidates(executable_name):
+    names = [executable_name]
+    if os.name == "nt" and not executable_name.lower().endswith(".exe"):
+        names.insert(0, f"{executable_name}.exe")
+    seen = set()
+    for raw_directory in os.environ.get("PATH", "").split(os.pathsep):
+        directory = raw_directory.strip().strip('"')
+        if not directory:
+            continue
+        for name in names:
+            candidate = (Path(directory) / name).resolve()
+            normalized = os.path.normcase(str(candidate))
+            if normalized not in seen and candidate.is_file():
+                seen.add(normalized)
+                yield candidate
+
+
 def locate_tool(environment_name, executable_name, required):
     configured = os.environ.get(environment_name, "").strip()
-    found = configured or shutil.which(executable_name)
-    if required and not found:
-        raise SystemExit(f"{executable_name} non trovato nel PATH o in {environment_name}.")
-    return Path(found).resolve() if found else None
+    if configured:
+        candidate = Path(configured).expanduser().resolve()
+        if candidate.is_file() and works_after_copy(candidate):
+            return candidate
+        raise SystemExit(
+            f"{environment_name} non indica un binario {executable_name} portabile valido: "
+            f"{candidate}"
+        )
+    rejected = []
+    for candidate in path_candidates(executable_name):
+        if works_after_copy(candidate):
+            return candidate
+        rejected.append(str(candidate))
+    if required:
+        detail = f" Binari non portabili ignorati: {', '.join(rejected)}." if rejected else ""
+        raise SystemExit(
+            f"{executable_name} portabile non trovato nel PATH o in {environment_name}.{detail}"
+        )
+    return None
 
 
 ffmpeg = locate_tool("ATS_FFMPEG_BINARY", "ffmpeg", True)

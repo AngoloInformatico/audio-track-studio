@@ -2,6 +2,7 @@
 
 import json
 import os
+import tempfile
 from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
@@ -15,6 +16,13 @@ def _default_data_dir() -> Path:
         return Path(configured).expanduser()
     base = Path(os.getenv("LOCALAPPDATA", Path.home() / ".local" / "share"))
     return base / "AudioTrackStudio"
+
+
+def _default_runtime_dir() -> Path:
+    configured = os.getenv("ATS_RUNTIME_DIR")
+    if configured:
+        return Path(configured).expanduser()
+    return Path(tempfile.gettempdir()) / "AudioTrackStudio"
 
 
 def _default_export_dir() -> Path:
@@ -65,13 +73,18 @@ class Settings:
     ffprobe_timeout_seconds: int = 60
     upload_chunk_bytes: int = 1024 * 1024
     data_dir: Path = field(default_factory=_default_data_dir)
+    runtime_dir: Path = field(default_factory=_default_runtime_dir)
     default_export_dir: Path = field(default_factory=_default_export_dir)
     cors_origins: tuple[str, ...] = ("http://127.0.0.1:5173", "http://localhost:5173")
     supported_extensions: frozenset[str] = frozenset({".flac", ".wav", ".mp3", ".m4a", ".aac"})
 
     @property
     def cache_dir(self) -> Path:
-        return self.data_dir / "cache"
+        return self.runtime_dir / "cache"
+
+    @property
+    def webview_dir(self) -> Path:
+        return self.runtime_dir / "webview"
 
     @property
     def log_dir(self) -> Path:

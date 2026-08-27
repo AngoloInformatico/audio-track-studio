@@ -89,9 +89,22 @@ class AudioLibrary:
             raise AudioLibraryError("Audio non trovato o sessione scaduta.")
         return item
 
+    def ids(self) -> tuple[str, ...]:
+        with self._lock:
+            return tuple(self._items)
+
     async def remove(self, audio_id: str) -> None:
         with self._lock:
             item = self._items.pop(audio_id, None)
         if item is None:
             raise AudioLibraryError("Audio non trovato o sessione scaduta.")
         await asyncio.to_thread(shutil.rmtree, item.path.parent, True)
+
+    async def clear(self) -> None:
+        """Discard every working copy still owned by this process."""
+
+        with self._lock:
+            items = tuple(self._items.values())
+            self._items.clear()
+        for item in items:
+            await asyncio.to_thread(shutil.rmtree, item.path.parent, True)
